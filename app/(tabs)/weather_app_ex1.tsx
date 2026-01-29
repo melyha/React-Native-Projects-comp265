@@ -20,7 +20,9 @@ const WeatherApp = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Weather App</Text>
-      <Button title='Toggle to '></Button>
+      <Button  title={`Toggle to ${unit === 'C' ? 'Fahrenheit' : 'Celsius'}`}
+  onPress={() => setUnit(unit === 'C' ? 'F' : 'C')}
+/>
 
  <View style={{ padding: 20 }}>
       <Picker
