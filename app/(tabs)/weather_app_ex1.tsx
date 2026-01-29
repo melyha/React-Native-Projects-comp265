@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+
 import { View, Text, StyleSheet, Button } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Picker } from '@react-native-picker/picker';
 
 const WeatherApp = () => {
@@ -19,8 +21,10 @@ const WeatherApp = () => {
 
 const selectedWeather = weatherData.find((data) => data.city === selectedCity);
 
+
+
 return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Weather App</Text>
       <Button  title={`Toggle to ${unit === 'C' ? 'Fahrenheit' : 'Celsius'}`}
   onPress={() => setUnit(unit === 'C' ? 'F' : 'C')}
@@ -50,7 +54,7 @@ onValueChange={(itemValue) => setSelectedCity(itemValue)}
 
 
 
-    </View>
+    </SafeAreaView>
   );
 };
 
