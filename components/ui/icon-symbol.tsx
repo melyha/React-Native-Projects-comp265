@@ -18,6 +18,12 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'cloud.rain.fill': 'cloud',
+'cloud.sun.fill': 'wb-cloudy',
+'sun.max.fill': 'wb-sunny', 
+'cloud.bolt.rain.fill': 'flash-on',
+'thermometer': 'device-thermostat',
+  
 } as IconMapping;
 
 /**

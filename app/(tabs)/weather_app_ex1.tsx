@@ -38,7 +38,7 @@ const WeatherApp = () => {
   </View>
   
   <View style={styles.contentContainer}></View>
-          <Text style={styles.text}>Weather App</Text>
+          <Text style={styles.text}></Text>
           <Button
             title={`Toggle to ${unit === "C" ? "Fahrenheit" : "Celsius"}`}
             onPress={() => setUnit(unit === "C" ? "F" : "C")}

@@ -37,6 +37,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
+      <Tabs.Screen
+  name="weather_app_ex1"
+  options={{
+    title: 'Weather',
+    tabBarIcon: ({ color }) => <IconSymbol size={28} name="cloud.rain.fill" color={color} />,
+  }}
+/>
     </Tabs>
     
   );
