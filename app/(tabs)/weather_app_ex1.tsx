@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
-const App = () => {
+const WeatherApp = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Weather App</Text>
-      <Button title='Toggle to Fahrenheit'></Button>
+      <Button title='Toggle to '></Button>
     </View>
   );
 };
@@ -23,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default WeatherApp;
