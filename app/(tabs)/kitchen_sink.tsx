@@ -12,6 +12,7 @@ import {
     TextInput,
 } from "react-native";
 
+
 /**
  * KitchenSinkStatesScreen
  * - Shows "Loading / Error / Empty / Success" as simple cards.
@@ -148,7 +149,7 @@ export default function KitchenSinkStatesScreen() {
     );
 }
 
-function Tag({ label }) {
+function Tag({ label }: { label: string }) {
     return (
         <ThemedView style={styles.tag}>
             <ThemedText style={styles.tagText}>{label}</ThemedText>
