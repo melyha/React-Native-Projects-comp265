@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 const App = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Weather App</Text>
+      <Button title='Toggle to Fahrenheit'></Button>
     </View>
   );
 };
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: 'white',
+    color: 'Black',
   },
 });
 
