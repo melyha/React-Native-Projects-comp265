@@ -13,7 +13,7 @@ const WeatherApp = () => {
     { city: 'Prince Albert', temperatureC: 16, condition: 'Rainy' },
   ];
 
-  const convertTemperature = (tempC) => {
+  const convertTemperature = (tempC: number) => {
     return unit === 'C' ? tempC : (tempC * 9) / 5 + 32;
   };
 
