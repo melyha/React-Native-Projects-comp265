@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const WeatherApp = () => {
-  const [selectedValue, setSelectedValue] = useState('apple');
+  const [unit, setUnit] = useState('C');  // 'C' for Celsius, 'F' for Fahrenheit
+  const [selectedCity, setSelectedCity] = useState('Saskatoon'); // Default city
 
 
   return (
@@ -13,14 +14,14 @@ const WeatherApp = () => {
 
  <View style={{ padding: 20 }}>
       <Picker
-        selectedValue={selectedValue}
-        onValueChange={(itemValue) => setSelectedValue(itemValue)}
+        selectedValue={selectedCity}
+onValueChange={(itemValue) => setSelectedCity(itemValue)}
       >
-        <Picker.Item label="Apple" value="apple" />
-        <Picker.Item label="Banana" value="banana" />
-        <Picker.Item label="Orange" value="orange" />
+        <Picker.Item label="Saskatoon" value="Saskatoon" />
+        <Picker.Item label="Regina" value="Regina" />
+        <Picker.Item label="Prince Albert" value="Prince Albert" />
       </Picker>
-      <Text style={{ marginTop: 10 }}>Selected: {selectedValue}</Text>
+      <Text style={{ marginTop: 10 }}>Selected: {selectedCity}</Text>
     </View>
 
 
