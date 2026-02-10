@@ -9,13 +9,17 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  TextInput,
+  Switch,
   TouchableOpacity,
   StatusBar,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
 
 // Import components
+import Header from "@/components/school-app/Header";
 
 export default function HomeScreen() {
   // State for TextInput and Switch
@@ -34,6 +38,21 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <Text style={styles.welcomeText}>Welcome back,</Text>
           <Text style={styles.nameText}>Cassandra Wellington</Text>
+
+          <View style={styles.switchRow}>
+            <Text style={styles.switchLabel}>Notifications</Text>
+            <Switch
+              value={notificationsEnabled}
+              onValueChange={setNotificationsEnabled}
+            />
+          </View>
+
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Hinted search text"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
         </View>
 
         {/* Schedule Section/ ScheduleCard Component*/}
@@ -90,6 +109,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 16,
+  },
+
+  switchLabel: {
+    color: "white",
+    fontSize: 14,
   },
 
   searchInput: {
