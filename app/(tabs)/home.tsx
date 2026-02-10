@@ -18,11 +18,11 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
 
-
 // Import components
 import Header from "@/components/school-app/Header";
-import ScheduleCard from '@/components/school-app/ScheduleCard';
-import DeadlineCard from '@/components/school-app/DeadlineCard';
+import ScheduleCard from "@/components/school-app/ScheduleCard";
+import DeadlineCard from "@/components/school-app/DeadlineCard";
+import NewsCard from "@/components/school-app/NewsCard";
 
 export default function HomeScreen() {
   // State for TextInput and Switch
@@ -62,12 +62,12 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Schedule</Text>
-                <TouchableOpacity>
+            <TouchableOpacity>
               <Text style={styles.viewAllText}>View All</Text>
             </TouchableOpacity>
           </View>
 
-           <ScheduleCard
+          <ScheduleCard
             time="9:00 AM"
             courseCode="MULT213"
             courseName="Web Development 5"
@@ -79,36 +79,68 @@ export default function HomeScreen() {
             courseName="Web Development 5"
             room="Room B8.10"
           />
-
         </View>
 
         {/* Deadlines Section/ DeadlineCard Component*/}
         <View style={styles.section}>
-              <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
-           <TouchableOpacity>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
+            <TouchableOpacity>
               <Text style={styles.viewAllText}>View All</Text>
             </TouchableOpacity>
-        </View>
-         <DeadlineCard
+          </View>
+          <DeadlineCard
             courseCode="DSGN210"
             title="Assignment 3: Build Web Applications"
             dueDate="Dec 18"
             isUrgent={true}
-            onPress={() => console.log('Deadline pressed')}
+            onPress={() => console.log("Deadline pressed")}
           />
           <DeadlineCard
             courseCode="DSGN210"
             title="Assignment 3: Build Web Applications"
             dueDate="Dec 18"
             isUrgent={true}
-            onPress={() => console.log('Deadline pressed')}
+            onPress={() => console.log("Deadline pressed")}
           />
-</View>
+        </View>
         {/* News Section/ NewsCard Component*/}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>News</Text>
-          <Text>News cards will go here</Text>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>News</Text>
+            <TouchableOpacity>
+              <Text style={styles.viewAllText}>View All</Text>
+            </TouchableOpacity>
+          </View>
+          {/* News Card 1 */}
+          <NewsCard
+            title="SaskInteractive Digital Showcase"
+            date="Nov 21, 2025"
+            description="Join us Friday November 28 from 5:00 pm - 8:00 pm at Innovation Place!"
+            buttonText="View Details"
+            imageUrl="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop"
+            onPress={() => console.log("News 1 pressed")}
+          />
+
+          {/* News Card 2 */}
+          <NewsCard
+            title="Refund and Withdrawal Deadlines for Fall Semester"
+            date="Nov 24, 2025"
+            description="Check out the full details below."
+            buttonText="Check Deadlines"
+            backgroundColor={colors.primaryContainer}
+            onPress={() => console.log("News 2 pressed")}
+          />
+
+          {/* News Card 3 */}
+          <NewsCard
+            title="Winter Break Schedule"
+            date="Dec 10, 2025"
+            description="Important information about campus hours during winter break."
+            buttonText="View Schedule"
+            imageUrl="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=200&fit=crop"
+            onPress={() => console.log("News 3 pressed")}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -177,7 +209,7 @@ const styles = StyleSheet.create({
 
   viewAllText: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
     color: colors.primary,
   },
 });
