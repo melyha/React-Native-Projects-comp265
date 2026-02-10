@@ -5,7 +5,7 @@
 
 export const colors = {
   // ── Primary ──────────────────────────────────────────────
-  primary: '#6750A4',
+  primary: '#6B46C1',
   onPrimary: '#FFFFFF',
   primaryContainer: '#EADDFF',
   onPrimaryContainer: '#21005D',
@@ -52,7 +52,7 @@ export const colors = {
   inversePrimary: '#D0BCFF',
 
   // ── Custom: Header gradient (from Figma design) ─────────
-  headerGradientStart: '#6750A4',
+  headerGradientStart: '#6B46C1;',
   headerGradientEnd: '#7E67C1',
 
   // ── Custom: Card button purple (from Figma) ─────────────
