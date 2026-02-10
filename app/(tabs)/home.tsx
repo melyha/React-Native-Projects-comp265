@@ -47,6 +47,8 @@ export default function HomeScreen() {
             <Switch
               value={notificationsEnabled}
               onValueChange={setNotificationsEnabled}
+              trackColor={{ false: "#3e1b85", true: "#f4f3f4" }}
+              thumbColor={notificationsEnabled ? "#4e21a8" : "#C7C7C7"}
             />
           </View>
 
