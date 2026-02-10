@@ -24,11 +24,13 @@ import Header from "@/components/school-app/Header";
 import ScheduleCard from "@/components/school-app/ScheduleCard";
 import DeadlineCard from "@/components/school-app/DeadlineCard";
 import NewsCard from "@/components/school-app/NewsCard";
+import Drawer from '@/components/school-app/Drawer';
 
 export default function HomeScreen() {
   // State for TextInput and Switch
   const [searchQuery, setSearchQuery] = useState("");
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -54,7 +56,8 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.searchContainer}>
-            <TouchableOpacity style={styles.menuIcon}>
+            <TouchableOpacity style={styles.menuIcon} onPress={() => setDrawerVisible(true)}
+>
               <Ionicons name="menu" size={20} color="#49454F" />
             </TouchableOpacity>
             <TextInput
@@ -152,6 +155,7 @@ export default function HomeScreen() {
           />
         </View>
       </ScrollView>
+       <Drawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} />
     </SafeAreaView>
   );
 }
@@ -234,5 +238,4 @@ const styles = StyleSheet.create({
   menuIcon: {
     padding: 4,
   },
-
 });
