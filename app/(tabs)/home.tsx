@@ -1,24 +1,51 @@
-import { View, Text, StyleSheet } from 'react-native';
+/**
+ * mySaskPoly Home Screen
+ * Saskatchewan Polytechnic Student App
+*/
+
+
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TextInput, Switch, TouchableOpacity, StatusBar} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors, spacing } from '@/constants/design-tokens';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>mySaskPoly Home</Text>
-      <Text>School app coming soon...</Text>
-    </View>
+     <SafeAreaView style={styles.container}>
+        <ScrollView>
+ {/* Header */}
+        <View style={styles.header}>
+            <Text style={styles.welcomeText}>Welcome back,</Text>
+          <Text style={styles.nameText}>Cassandra Wellington</Text>
+          
+
+
+
+        </View>
+        </ScrollView>
+     </SafeAreaView>
+  
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  header: {
+    backgroundColor: '#6750A4',
     padding: 20,
   },
-  title: {
+  welcomeText: {
+    fontSize: 14,
+    color: 'white',
+    opacity: 0.8,
+  },
+  nameText: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: 'white',
     marginBottom: 16,
   },
 });
