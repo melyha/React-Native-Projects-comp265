@@ -20,6 +20,7 @@ import { colors, spacing } from "@/constants/design-tokens";
 
 // Import components
 import Header from "@/components/school-app/Header";
+import ScheduleCard from '@/components/school-app/ScheduleCard';
 
 export default function HomeScreen() {
   // State for TextInput and Switch
@@ -59,8 +60,24 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Schedule</Text>
-            <Text>Schedule cards will go here</Text>
+                <TouchableOpacity>
+              <Text style={styles.viewAllText}>View All</Text>
+            </TouchableOpacity>
           </View>
+
+           <ScheduleCard
+            time="9:00 AM"
+            courseCode="MULT213"
+            courseName="Web Development 5"
+            room="Room B8.10"
+          />
+          <ScheduleCard
+            time="9:00 AM"
+            courseCode="MULT213"
+            courseName="Web Development 5"
+            room="Room B8.10"
+          />
+
         </View>
 
         {/* Deadlines Section/ DeadlineCard Component*/}
@@ -137,5 +154,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 12,
+  },
+
+  viewAllText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.primary,
   },
 });
