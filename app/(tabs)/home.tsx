@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
+import { Ionicons } from "@expo/vector-icons";
 
 // Import components
 import Header from "@/components/school-app/Header";
@@ -52,12 +53,18 @@ export default function HomeScreen() {
             />
           </View>
 
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Hinted search text"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
+          <View style={styles.searchContainer}>
+            <TouchableOpacity style={styles.menuIcon}>
+              <Ionicons name="menu" size={20} color="#49454F" />
+            </TouchableOpacity>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Hinted search text"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            <Ionicons name="search" size={20} color="#49454F" />
+          </View>
         </View>
 
         {/* Schedule Section/ ScheduleCard Component*/}
@@ -187,10 +194,12 @@ const styles = StyleSheet.create({
   },
 
   searchInput: {
+    flex: 1,
     backgroundColor: "white",
     padding: 12,
     borderRadius: 28,
     fontSize: 14,
+    marginLeft: 8,
   },
 
   section: {
@@ -214,4 +223,16 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: colors.primary,
   },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 28,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  menuIcon: {
+    padding: 4,
+  },
+
 });
