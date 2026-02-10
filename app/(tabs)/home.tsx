@@ -18,9 +18,11 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
 
+
 // Import components
 import Header from "@/components/school-app/Header";
 import ScheduleCard from '@/components/school-app/ScheduleCard';
+import DeadlineCard from '@/components/school-app/DeadlineCard';
 
 export default function HomeScreen() {
   // State for TextInput and Switch
@@ -82,10 +84,27 @@ export default function HomeScreen() {
 
         {/* Deadlines Section/ DeadlineCard Component*/}
         <View style={styles.section}>
+              <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
-          <Text>Deadline cards will go here</Text>
+           <TouchableOpacity>
+              <Text style={styles.viewAllText}>View All</Text>
+            </TouchableOpacity>
         </View>
-
+         <DeadlineCard
+            courseCode="DSGN210"
+            title="Assignment 3: Build Web Applications"
+            dueDate="Dec 18"
+            isUrgent={true}
+            onPress={() => console.log('Deadline pressed')}
+          />
+          <DeadlineCard
+            courseCode="DSGN210"
+            title="Assignment 3: Build Web Applications"
+            dueDate="Dec 18"
+            isUrgent={true}
+            onPress={() => console.log('Deadline pressed')}
+          />
+</View>
         {/* News Section/ NewsCard Component*/}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>News</Text>
