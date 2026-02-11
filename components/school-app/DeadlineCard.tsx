@@ -3,10 +3,16 @@
  * Displays an assignment deadline with urgent badge
  */
 
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+  elevation,
+} from "@/constants/design-tokens";
 
 interface DeadlineCardProps {
   courseCode: string;
@@ -16,12 +22,12 @@ interface DeadlineCardProps {
   onPress?: () => void;
 }
 
-export default function DeadlineCard({ 
-  courseCode, 
-  title, 
-  dueDate, 
+export default function DeadlineCard({
+  courseCode,
+  title,
+  dueDate,
   isUrgent = false,
-  onPress 
+  onPress,
 }: DeadlineCardProps) {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
@@ -44,9 +50,9 @@ export default function DeadlineCard({
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: colors.white,
     padding: spacing.md,
     borderRadius: borderRadius.md,
@@ -57,8 +63,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: spacing.xs,
   },
   courseCode: {
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
   urgentText: {
     ...typography.labelSmall,
     color: colors.badgeUrgent,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   title: {
     ...typography.bodyLarge,

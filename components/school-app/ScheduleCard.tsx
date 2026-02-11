@@ -3,10 +3,15 @@
  * Displays a single class schedule item
  */
 
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
-
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+  elevation,
+} from "@/constants/design-tokens";
 
 interface ScheduleCardProps {
   time: string;
@@ -15,14 +20,19 @@ interface ScheduleCardProps {
   room: string;
 }
 
-export default function ScheduleCard({ time, courseCode, courseName, room }: ScheduleCardProps) {
+export default function ScheduleCard({
+  time,
+  courseCode,
+  courseName,
+  room,
+}: ScheduleCardProps) {
   return (
-      <View style={styles.card}>
+    <View style={styles.card}>
       <View style={styles.timeContainer}>
         <Text style={styles.timeLabel}>Time</Text>
         <Text style={styles.timeValue}>{time}</Text>
       </View>
-      
+
       <View style={styles.details}>
         <Text style={styles.courseCode}>{courseCode}</Text>
         <Text style={styles.courseName}>{courseName}</Text>
@@ -34,7 +44,7 @@ export default function ScheduleCard({ time, courseCode, courseName, room }: Sch
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: colors.white,
     padding: spacing.md,
     borderRadius: borderRadius.md,
@@ -43,7 +53,7 @@ const styles = StyleSheet.create({
   },
   timeContainer: {
     marginRight: spacing.md,
-    alignItems: 'center',
+    alignItems: "center",
     minWidth: 60,
   },
   timeLabel: {
@@ -53,7 +63,7 @@ const styles = StyleSheet.create({
   },
   timeValue: {
     ...typography.bodyMedium,
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.onSurface,
   },
   details: {
