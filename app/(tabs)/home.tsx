@@ -20,6 +20,7 @@ import { colors, spacing } from "@/constants/design-tokens";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect } from "react";
 import { Storage } from "@/components/utilities/db";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Import components
 import Header from "@/components/school-app/Header";
