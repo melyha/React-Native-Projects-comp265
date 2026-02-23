@@ -70,6 +70,21 @@ useEffect(() => {
   }
 }, []);
 
+// Helper to update deadlines and save to storage
+const updateDeadlines = (newDeadlines: any[]) => {
+  console.log('Updating deadlines:', newDeadlines);
+  setDeadlines(newDeadlines);
+  Storage.saveDataSync('deadlines', newDeadlines);
+};
+
+// Mark deadline as complete
+const handleDeadlinePress = (deadlineId: string) => {
+  const updated = deadlines.map(d =>
+    d.id === deadlineId ? { ...d, completed: true } : d
+  );
+  updateDeadlines(updated);
+};
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
