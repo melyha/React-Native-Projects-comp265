@@ -65,6 +65,7 @@ export default function HomeScreen() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
 const [showCompleted, setShowCompleted] = useState(false);
+const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
 
   // Load deadlines from storage on mount
   useEffect(() => {
