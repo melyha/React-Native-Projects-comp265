@@ -84,6 +84,14 @@ export default function HomeScreen() {
     updateDeadlines(updated);
   };
 
+
+// Delete deadline permanently
+const handleDeadlineDelete = (deadlineId: string) => {
+  const updated = deadlines.filter((d) => d.id !== deadlineId);
+  updateDeadlines(updated);
+  console.log("Deleted deadline:", deadlineId);
+};
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
