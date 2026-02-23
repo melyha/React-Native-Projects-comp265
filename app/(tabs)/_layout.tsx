@@ -18,36 +18,90 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
       }}
     >
+      {/* Tab 1: Home */}
       <Tabs.Screen
         name="home"
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <Ionicons size={28} name="home" color={color} />
           ),
+        }}
+      />
+      {/* Tab 2: Courses */}
+      <Tabs.Screen
+        name="courses"
+        options={{
+          title: "Courses",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="book" size={24} color={color} />
+          ),
+        }}
+      />
+      {/* Tab 3: Grades */}
+      <Tabs.Screen
+        name="grades"
+        options={{
+          title: "Grades",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="bar-chart" size={24} color={color} />
+          ),
+        }}
+      />
+      {/* Tab 4: Schedule */}
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: "Schedule",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="calendar" size={24} color={color} />
+          ),
+        }}
+      />
+      // Debug Tab (hidden from tab bar)
+      <Tabs.Screen
+        name="storage-debug"
+        options={{
+          title: "Debug",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="bug" size={24} color={color} />
+          ),
+        }}
+      />
+
+         {/* Stack Screens (hidden from tabs) */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          href: null, // Hidden from tab bar
+          title: "My Profile",
         }}
       />
 
       <Tabs.Screen
-        name="explore"
+        name="settings"
         options={{
-          title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
+          href: null, // Hidden from tab bar
+          title: "Settings",
         }}
       />
 
-      // Add after explore tab
-<Tabs.Screen
-  name="storage-debug"
-  options={{
-    title: "Debug",
-    tabBarIcon: ({ color }) => (
-      <Ionicons name="bug" size={24} color={color} />
-    ),
-  }}
-/>
+      <Tabs.Screen
+        name="course-details"
+        options={{
+          href: null, // Hidden from tab bar
+          title: "Course Details",
+        }}
+      />
+
+      <Tabs.Screen
+        name="grade-details"
+        options={{
+          href: null, // Hidden from tab bar
+          title: "Grade Details",
+        }}
+      />
+      
     </Tabs>
   );
 }
