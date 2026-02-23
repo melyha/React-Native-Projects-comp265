@@ -18,8 +18,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect } from 'react';
-import { Storage } from '@/components/utilities/db';
+import { useEffect } from "react";
+import { Storage } from "@/components/utilities/db";
 
 // Import components
 import Header from "@/components/school-app/Header";
@@ -28,29 +28,27 @@ import DeadlineCard from "@/components/school-app/DeadlineCard";
 import NewsCard from "@/components/school-app/NewsCard";
 import Drawer from "@/components/school-app/Drawer";
 
-
 // Default deadline data structure
 const DEFAULT_DEADLINES = [
-  { 
-    id: '1', 
-    courseCode: "DSGN210", 
-    title: "Assignment 3: Build Web Applications", 
-    dueDate: "Dec 18", 
+  {
+    id: "1",
+    courseCode: "DSGN210",
+    title: "Assignment 3: Build Web Applications",
+    dueDate: "Dec 18",
     isUrgent: true,
     completed: false,
   },
-  { 
-    id: '2', 
-    courseCode: "COMP265", 
-    title: "React Native Navigation Exercise", 
-    dueDate: "Dec 20", 
+  {
+    id: "2",
+    courseCode: "COMP265",
+    title: "React Native Navigation Exercise",
+    dueDate: "Dec 20",
     isUrgent: true,
     completed: false,
   },
 ];
 
-
-  // State for TextInput and Switch
+// State for TextInput and Switch
 export default function HomeScreen() {
   // State for TextInput and Switch
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,31 +57,31 @@ export default function HomeScreen() {
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
 
   // Load deadlines from storage on mount
-useEffect(() => {
-  const savedDeadlines = Storage.loadDataSync('deadlines');
-  if (savedDeadlines) {
-    console.log('Loaded deadlines from storage:', savedDeadlines);
-    setDeadlines(savedDeadlines as any[]);
-  } else {
-    console.log('No saved deadlines, using defaults');
-    Storage.saveDataSync('deadlines', DEFAULT_DEADLINES);
-  }
-}, []);
+  useEffect(() => {
+    const savedDeadlines = Storage.loadDataSync("deadlines");
+    if (savedDeadlines) {
+      console.log("Loaded deadlines from storage:", savedDeadlines);
+      setDeadlines(savedDeadlines as any[]);
+    } else {
+      console.log("No saved deadlines, using defaults");
+      Storage.saveDataSync("deadlines", DEFAULT_DEADLINES);
+    }
+  }, []);
 
-// Helper to update deadlines and save to storage
-const updateDeadlines = (newDeadlines: any[]) => {
-  console.log('Updating deadlines:', newDeadlines);
-  setDeadlines(newDeadlines);
-  Storage.saveDataSync('deadlines', newDeadlines);
-};
+  // Helper to update deadlines and save to storage
+  const updateDeadlines = (newDeadlines: any[]) => {
+    console.log("Updating deadlines:", newDeadlines);
+    setDeadlines(newDeadlines);
+    Storage.saveDataSync("deadlines", newDeadlines);
+  };
 
-// Mark deadline as complete
-const handleDeadlinePress = (deadlineId: string) => {
-  const updated = deadlines.map(d =>
-    d.id === deadlineId ? { ...d, completed: true } : d
-  );
-  updateDeadlines(updated);
-};
+  // Mark deadline as complete
+  const handleDeadlinePress = (deadlineId: string) => {
+    const updated = deadlines.map((d) =>
+      d.id === deadlineId ? { ...d, completed: true } : d,
+    );
+    updateDeadlines(updated);
+  };
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -156,20 +154,19 @@ const handleDeadlinePress = (deadlineId: string) => {
               <Text style={styles.viewAllText}>View All</Text>
             </TouchableOpacity>
           </View>
-          <DeadlineCard
-            courseCode="DSGN210"
-            title="Assignment 3: Build Web Applications"
-            dueDate="Dec 18"
-            isUrgent={true}
-            onPress={() => console.log("Deadline pressed")}
-          />
-          <DeadlineCard
-            courseCode="DSGN210"
-            title="Assignment 3: Build Web Applications"
-            dueDate="Dec 18"
-            isUrgent={true}
-            onPress={() => console.log("Deadline pressed")}
-          />
+          {deadlines
+            .filter((d) => !d.completed) // Only show incomplete deadlines
+            .slice(0, 2) // Show first 2
+            .map((deadline) => (
+              <DeadlineCard
+                key={deadline.id}
+                courseCode={deadline.courseCode}
+                title={deadline.title}
+                dueDate={deadline.dueDate}
+                isUrgent={deadline.isUrgent}
+                onPress={() => handleDeadlinePress(deadline.id)}
+              />
+            ))}
         </View>
 
         {/* News Section/ NewsCard Component*/}
