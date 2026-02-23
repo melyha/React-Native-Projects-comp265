@@ -56,6 +56,7 @@ export default function HomeScreen() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
+const [showCompleted, setShowCompleted] = useState(false);
 
   // Load deadlines from storage on mount
   useEffect(() => {
@@ -93,6 +94,7 @@ const handleDeadlineDelete = (deadlineId: string) => {
 };
 
   return (
+      <GestureHandlerRootView style={{ flex: 1 }}>
     <SafeAreaView style={styles.container} edges={["top"]}>
       <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
@@ -219,6 +221,7 @@ const handleDeadlineDelete = (deadlineId: string) => {
       </ScrollView>
       <Drawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} />
     </SafeAreaView>
+      </GestureHandlerRootView>
   );
 }
 
