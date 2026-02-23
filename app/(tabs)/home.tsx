@@ -49,6 +49,14 @@ const DEFAULT_DEADLINES = [
   },
 ];
 
+// Default user preferences
+const DEFAULT_PREFERENCES = {
+  notificationsEnabled: true,
+  theme: 'light', // 'light' or 'dark'
+  defaultView: 'schedule', // 'schedule', 'deadlines', 'news'
+  sectionOrder: ['schedule', 'deadlines', 'news'], // For future drag-and-drop
+};
+
 // State for TextInput and Switch
 export default function HomeScreen() {
   // State for TextInput and Switch
