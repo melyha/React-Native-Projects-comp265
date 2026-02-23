@@ -58,6 +58,18 @@ export default function HomeScreen() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
 
+  // Load deadlines from storage on mount
+useEffect(() => {
+  const savedDeadlines = Storage.loadDataSync('deadlines');
+  if (savedDeadlines) {
+    console.log('Loaded deadlines from storage:', savedDeadlines);
+    setDeadlines(savedDeadlines as any[]);
+  } else {
+    console.log('No saved deadlines, using defaults');
+    Storage.saveDataSync('deadlines', DEFAULT_DEADLINES);
+  }
+}, []);
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
