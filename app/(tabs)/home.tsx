@@ -52,9 +52,9 @@ const DEFAULT_DEADLINES = [
 // Default user preferences
 const DEFAULT_PREFERENCES = {
   notificationsEnabled: true,
-  theme: 'light', // 'light' or 'dark'
-  defaultView: 'schedule', // 'schedule', 'deadlines', 'news'
-  sectionOrder: ['schedule', 'deadlines', 'news'], // For future drag-and-drop
+  theme: "light", // 'light' or 'dark'
+  defaultView: "schedule", // 'schedule', 'deadlines', 'news'
+  sectionOrder: ["schedule", "deadlines", "news"], // For future drag-and-drop
 };
 
 // State for TextInput and Switch
@@ -64,8 +64,8 @@ export default function HomeScreen() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
-const [showCompleted, setShowCompleted] = useState(false);
-const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
+  const [showCompleted, setShowCompleted] = useState(false);
+  const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
 
   // Load deadlines from storage on mount
   useEffect(() => {
@@ -78,18 +78,16 @@ const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
       Storage.saveDataSync("deadlines", DEFAULT_DEADLINES);
     }
 
-
-  // Load preferences
-  const savedPrefs = Storage.loadDataSync('userPreferences');
-  if (savedPrefs) {
-    console.log('Loaded preferences from storage:', savedPrefs);
-    setUserPrefs(savedPrefs as any);
-    setNotificationsEnabled((savedPrefs as any).notificationsEnabled);
-  } else {
-    console.log('No saved preferences, using defaults');
-    Storage.saveDataSync('userPreferences', DEFAULT_PREFERENCES);
-  }
-  
+    // Load preferences
+    const savedPrefs = Storage.loadDataSync("userPreferences");
+    if (savedPrefs) {
+      console.log("Loaded preferences from storage:", savedPrefs);
+      setUserPrefs(savedPrefs as any);
+      setNotificationsEnabled((savedPrefs as any).notificationsEnabled);
+    } else {
+      console.log("No saved preferences, using defaults");
+      Storage.saveDataSync("userPreferences", DEFAULT_PREFERENCES);
+    }
   }, []);
 
   // Helper to update deadlines and save to storage
@@ -107,189 +105,208 @@ const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
     updateDeadlines(updated);
   };
 
+  // Helper to update single preference
+  const updatePreference = (key: string, value: any) => {
+    const updated = { ...userPrefs, [key]: value };
+    console.log("Updating preference:", key, "=", value);
+    setUserPrefs(updated);
+    Storage.saveDataSync("userPreferences", updated);
+  };
 
-// Delete deadline permanently
-const handleDeadlineDelete = (deadlineId: string) => {
-  const updated = deadlines.filter((d) => d.id !== deadlineId);
-  updateDeadlines(updated);
-  console.log("Deleted deadline:", deadlineId);
-};
+  // Delete deadline permanently
+  const handleDeadlineDelete = (deadlineId: string) => {
+    const updated = deadlines.filter((d) => d.id !== deadlineId);
+    updateDeadlines(updated);
+    console.log("Deleted deadline:", deadlineId);
+  };
 
   return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-    <SafeAreaView style={styles.container} edges={["top"]}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.container} edges={["top"]}>
+        <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Header Section/ Header Component */}
-        <View style={styles.header}>
-          <Text style={styles.welcomeText}>Welcome back,</Text>
-          <Text style={styles.nameText}>Cassandra Wellington</Text>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* Header Section/ Header Component */}
+          <View style={styles.header}>
+            <Text style={styles.welcomeText}>Welcome back,</Text>
+            <Text style={styles.nameText}>Cassandra Wellington</Text>
 
-          <View style={styles.switchRow}>
-            <Text style={styles.switchLabel}>Notifications</Text>
-            <Switch
-              value={notificationsEnabled}
-              onValueChange={setNotificationsEnabled}
-              trackColor={{ false: "#3e1b85", true: "#f4f3f4" }}
-              thumbColor={notificationsEnabled ? "#4e21a8" : "#C7C7C7"}
+            <View style={styles.switchRow}>
+              <Text style={styles.switchLabel}>Notifications</Text>
+              <Switch
+                value={notificationsEnabled}
+                onValueChange={(value) => {
+                  setNotificationsEnabled(value);
+                  updatePreference("notificationsEnabled", value);
+                }}
+                trackColor={{ false: "#3e1b85", true: "#f4f3f4" }}
+                thumbColor={notificationsEnabled ? "#4e21a8" : "#C7C7C7"}
+              />
+            </View>
+
+            <View style={styles.searchContainer}>
+              <TouchableOpacity
+                style={styles.menuIcon}
+                onPress={() => setDrawerVisible(true)}
+              >
+                <Ionicons name="menu" size={20} color="#49454F" />
+              </TouchableOpacity>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Hinted search text"
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+              />
+              <Ionicons name="search" size={20} color="#49454F" />
+            </View>
+          </View>
+
+          {/* Schedule Section/ ScheduleCard Component*/}
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Schedule</Text>
+              <TouchableOpacity>
+                <Text style={styles.viewAllText}>View All</Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScheduleCard
+              time="9:00 AM"
+              courseCode="MULT213"
+              courseName="Web Development 5"
+              room="Room B8.10"
+            />
+            <ScheduleCard
+              time="9:00 AM"
+              courseCode="MULT213"
+              courseName="Web Development 5"
+              room="Room B8.10"
             />
           </View>
 
-          <View style={styles.searchContainer}>
-            <TouchableOpacity
-              style={styles.menuIcon}
-              onPress={() => setDrawerVisible(true)}
-            >
-              <Ionicons name="menu" size={20} color="#49454F" />
-            </TouchableOpacity>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Hinted search text"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
+          {/* Deadlines Section/ DeadlineCard Component*/}
+          {/* Deadlines Section/ DeadlineCard Component*/}
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
+              <TouchableOpacity>
+                <Text style={styles.viewAllText}>View All</Text>
+              </TouchableOpacity>
+            </View>
+
+            {/* Incomplete Deadlines */}
+            {deadlines
+              .filter((d) => !d.completed)
+              .slice(0, 2)
+              .map((deadline) => (
+                <DeadlineCard
+                  key={deadline.id}
+                  courseCode={deadline.courseCode}
+                  title={deadline.title}
+                  dueDate={deadline.dueDate}
+                  isUrgent={deadline.isUrgent}
+                  completed={deadline.completed}
+                  onComplete={() => handleDeadlinePress(deadline.id)}
+                  onDelete={() => handleDeadlineDelete(deadline.id)}
+                />
+              ))}
+
+            {/* Show Completed Toggle */}
+            {deadlines.filter((d) => d.completed).length > 0 && (
+              <TouchableOpacity
+                onPress={() => setShowCompleted(!showCompleted)}
+                style={{
+                  marginTop: 12,
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Ionicons
+                  name={showCompleted ? "chevron-down" : "chevron-forward"}
+                  size={16}
+                  color={colors.primary}
+                />
+                <Text
+                  style={{ color: colors.primary, fontSize: 14, marginLeft: 4 }}
+                >
+                  {showCompleted ? "Hide" : "Show"} Completed (
+                  {deadlines.filter((d) => d.completed).length})
+                </Text>
+              </TouchableOpacity>
+            )}
+
+            {/* Completed Deadlines */}
+            {showCompleted &&
+              deadlines
+                .filter((d) => d.completed)
+                .map((deadline) => (
+                  <DeadlineCard
+                    key={deadline.id}
+                    courseCode={deadline.courseCode}
+                    title={deadline.title}
+                    dueDate={deadline.dueDate}
+                    isUrgent={false}
+                    completed={true}
+                    onPress={() => {
+                      // Uncomplete it
+                      const updated = deadlines.map((d) =>
+                        d.id === deadline.id ? { ...d, completed: false } : d,
+                      );
+                      updateDeadlines(updated);
+                    }}
+                    onDelete={() => handleDeadlineDelete(deadline.id)}
+                  />
+                ))}
+          </View>
+
+          {/* News Section/ NewsCard Component*/}
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>News</Text>
+              <TouchableOpacity>
+                <Text style={styles.viewAllText}>View All</Text>
+              </TouchableOpacity>
+            </View>
+            {/* News Card 1 */}
+            <NewsCard
+              title="SaskInteractive Digital Showcase"
+              date="Nov 21, 2025"
+              description="Join us Friday November 28 from 5:00 pm - 8:00 pm at Innovation Place!"
+              buttonText="View Details"
+              imageUrl="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop"
+              onPress={() => console.log("News 1 pressed")}
             />
-            <Ionicons name="search" size={20} color="#49454F" />
+
+            {/* News Card 2 */}
+            <NewsCard
+              title="Refund and Withdrawal Deadlines for Fall Semester"
+              date="Nov 24, 2025"
+              description="Check out the full details below."
+              buttonText="Check Deadlines"
+              backgroundColor={colors.primaryContainer}
+              onPress={() => console.log("News 2 pressed")}
+            />
+
+            {/* News Card 3 */}
+            <NewsCard
+              title="Winter Break Schedule"
+              date="Dec 10, 2025"
+              description="Important information about campus hours during winter break."
+              buttonText="View Schedule"
+              imageUrl="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=200&fit=crop"
+              onPress={() => console.log("News 3 pressed")}
+            />
           </View>
-        </View>
-
-        {/* Schedule Section/ ScheduleCard Component*/}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Schedule</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAllText}>View All</Text>
-            </TouchableOpacity>
-          </View>
-
-          <ScheduleCard
-            time="9:00 AM"
-            courseCode="MULT213"
-            courseName="Web Development 5"
-            room="Room B8.10"
-          />
-          <ScheduleCard
-            time="9:00 AM"
-            courseCode="MULT213"
-            courseName="Web Development 5"
-            room="Room B8.10"
-          />
-        </View>
-
-        {/* Deadlines Section/ DeadlineCard Component*/}
-     {/* Deadlines Section/ DeadlineCard Component*/}
-<View style={styles.section}>
-  <View style={styles.sectionHeader}>
-    <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
-    <TouchableOpacity>
-      <Text style={styles.viewAllText}>View All</Text>
-    </TouchableOpacity>
-  </View>
-
-  {/* Incomplete Deadlines */}
-  {deadlines
-    .filter((d) => !d.completed)
-    .slice(0, 2)
-    .map((deadline) => (
-      <DeadlineCard
-        key={deadline.id}
-        courseCode={deadline.courseCode}
-        title={deadline.title}
-        dueDate={deadline.dueDate}
-        isUrgent={deadline.isUrgent}
-        completed={deadline.completed}
-        onComplete={() => handleDeadlinePress(deadline.id)}
-        onDelete={() => handleDeadlineDelete(deadline.id)}
-      />
-    ))}
-
-  {/* Show Completed Toggle */}
-  {deadlines.filter((d) => d.completed).length > 0 && (
-    <TouchableOpacity
-      onPress={() => setShowCompleted(!showCompleted)}
-      style={{ marginTop: 12, flexDirection: "row", alignItems: "center" }}
-    >
-      <Ionicons
-        name={showCompleted ? "chevron-down" : "chevron-forward"}
-        size={16}
-        color={colors.primary}
-      />
-      <Text style={{ color: colors.primary, fontSize: 14, marginLeft: 4 }}>
-        {showCompleted ? "Hide" : "Show"} Completed (
-        {deadlines.filter((d) => d.completed).length})
-      </Text>
-    </TouchableOpacity>
-  )}
-
-  {/* Completed Deadlines */}
-  {showCompleted &&
-    deadlines
-      .filter((d) => d.completed)
-      .map((deadline) => (
-        <DeadlineCard
-          key={deadline.id}
-          courseCode={deadline.courseCode}
-          title={deadline.title}
-          dueDate={deadline.dueDate}
-          isUrgent={false}
-          completed={true}
-          onPress={() => {
-            // Uncomplete it
-            const updated = deadlines.map((d) =>
-              d.id === deadline.id ? { ...d, completed: false } : d
-            );
-            updateDeadlines(updated);
-          }}
-          onDelete={() => handleDeadlineDelete(deadline.id)}
+        </ScrollView>
+        <Drawer
+          visible={drawerVisible}
+          onClose={() => setDrawerVisible(false)}
         />
-      ))}
-</View>
-
-        {/* News Section/ NewsCard Component*/}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>News</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAllText}>View All</Text>
-            </TouchableOpacity>
-          </View>
-          {/* News Card 1 */}
-          <NewsCard
-            title="SaskInteractive Digital Showcase"
-            date="Nov 21, 2025"
-            description="Join us Friday November 28 from 5:00 pm - 8:00 pm at Innovation Place!"
-            buttonText="View Details"
-            imageUrl="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop"
-            onPress={() => console.log("News 1 pressed")}
-          />
-
-          {/* News Card 2 */}
-          <NewsCard
-            title="Refund and Withdrawal Deadlines for Fall Semester"
-            date="Nov 24, 2025"
-            description="Check out the full details below."
-            buttonText="Check Deadlines"
-            backgroundColor={colors.primaryContainer}
-            onPress={() => console.log("News 2 pressed")}
-          />
-
-          {/* News Card 3 */}
-          <NewsCard
-            title="Winter Break Schedule"
-            date="Dec 10, 2025"
-            description="Important information about campus hours during winter break."
-            buttonText="View Schedule"
-            imageUrl="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=200&fit=crop"
-            onPress={() => console.log("News 3 pressed")}
-          />
-        </View>
-      </ScrollView>
-      <Drawer visible={drawerVisible} onClose={() => setDrawerVisible(false)} />
-    </SafeAreaView>
-      </GestureHandlerRootView>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
