@@ -158,27 +158,73 @@ const handleDeadlineDelete = (deadlineId: string) => {
         </View>
 
         {/* Deadlines Section/ DeadlineCard Component*/}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAllText}>View All</Text>
-            </TouchableOpacity>
-          </View>
-          {deadlines
-            .filter((d) => !d.completed) // Only show incomplete deadlines
-            .slice(0, 2) // Show first 2
-            .map((deadline) => (
-              <DeadlineCard
-                key={deadline.id}
-                courseCode={deadline.courseCode}
-                title={deadline.title}
-                dueDate={deadline.dueDate}
-                isUrgent={deadline.isUrgent}
-                onPress={() => handleDeadlinePress(deadline.id)}
-              />
-            ))}
-        </View>
+     {/* Deadlines Section/ DeadlineCard Component*/}
+<View style={styles.section}>
+  <View style={styles.sectionHeader}>
+    <Text style={styles.sectionTitle}>Upcoming Deadlines</Text>
+    <TouchableOpacity>
+      <Text style={styles.viewAllText}>View All</Text>
+    </TouchableOpacity>
+  </View>
+
+  {/* Incomplete Deadlines */}
+  {deadlines
+    .filter((d) => !d.completed)
+    .slice(0, 2)
+    .map((deadline) => (
+      <DeadlineCard
+        key={deadline.id}
+        courseCode={deadline.courseCode}
+        title={deadline.title}
+        dueDate={deadline.dueDate}
+        isUrgent={deadline.isUrgent}
+        completed={deadline.completed}
+        onComplete={() => handleDeadlinePress(deadline.id)}
+        onDelete={() => handleDeadlineDelete(deadline.id)}
+      />
+    ))}
+
+  {/* Show Completed Toggle */}
+  {deadlines.filter((d) => d.completed).length > 0 && (
+    <TouchableOpacity
+      onPress={() => setShowCompleted(!showCompleted)}
+      style={{ marginTop: 12, flexDirection: "row", alignItems: "center" }}
+    >
+      <Ionicons
+        name={showCompleted ? "chevron-down" : "chevron-forward"}
+        size={16}
+        color={colors.primary}
+      />
+      <Text style={{ color: colors.primary, fontSize: 14, marginLeft: 4 }}>
+        {showCompleted ? "Hide" : "Show"} Completed (
+        {deadlines.filter((d) => d.completed).length})
+      </Text>
+    </TouchableOpacity>
+  )}
+
+  {/* Completed Deadlines */}
+  {showCompleted &&
+    deadlines
+      .filter((d) => d.completed)
+      .map((deadline) => (
+        <DeadlineCard
+          key={deadline.id}
+          courseCode={deadline.courseCode}
+          title={deadline.title}
+          dueDate={deadline.dueDate}
+          isUrgent={false}
+          completed={true}
+          onPress={() => {
+            // Uncomplete it
+            const updated = deadlines.map((d) =>
+              d.id === deadline.id ? { ...d, completed: false } : d
+            );
+            updateDeadlines(updated);
+          }}
+          onDelete={() => handleDeadlineDelete(deadline.id)}
+        />
+      ))}
+</View>
 
         {/* News Section/ NewsCard Component*/}
         <View style={styles.section}>
