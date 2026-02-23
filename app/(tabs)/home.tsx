@@ -18,6 +18,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors, spacing } from "@/constants/design-tokens";
 import { Ionicons } from "@expo/vector-icons";
+import { useEffect } from 'react';
+import { Storage } from '@/components/utilities/db';
 
 // Import components
 import Header from "@/components/school-app/Header";
@@ -26,11 +28,35 @@ import DeadlineCard from "@/components/school-app/DeadlineCard";
 import NewsCard from "@/components/school-app/NewsCard";
 import Drawer from "@/components/school-app/Drawer";
 
+
+// Default deadline data structure
+const DEFAULT_DEADLINES = [
+  { 
+    id: '1', 
+    courseCode: "DSGN210", 
+    title: "Assignment 3: Build Web Applications", 
+    dueDate: "Dec 18", 
+    isUrgent: true,
+    completed: false,
+  },
+  { 
+    id: '2', 
+    courseCode: "COMP265", 
+    title: "React Native Navigation Exercise", 
+    dueDate: "Dec 20", 
+    isUrgent: true,
+    completed: false,
+  },
+];
+
+
+  // State for TextInput and Switch
 export default function HomeScreen() {
   // State for TextInput and Switch
   const [searchQuery, setSearchQuery] = useState("");
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [drawerVisible, setDrawerVisible] = useState(false);
+  
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -118,6 +144,7 @@ export default function HomeScreen() {
             onPress={() => console.log("Deadline pressed")}
           />
         </View>
+
         {/* News Section/ NewsCard Component*/}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
