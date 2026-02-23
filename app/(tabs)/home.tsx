@@ -56,7 +56,7 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  
+  const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
