@@ -77,6 +77,19 @@ const [userPrefs, setUserPrefs] = useState(DEFAULT_PREFERENCES);
       console.log("No saved deadlines, using defaults");
       Storage.saveDataSync("deadlines", DEFAULT_DEADLINES);
     }
+
+
+  // Load preferences
+  const savedPrefs = Storage.loadDataSync('userPreferences');
+  if (savedPrefs) {
+    console.log('Loaded preferences from storage:', savedPrefs);
+    setUserPrefs(savedPrefs as any);
+    setNotificationsEnabled((savedPrefs as any).notificationsEnabled);
+  } else {
+    console.log('No saved preferences, using defaults');
+    Storage.saveDataSync('userPreferences', DEFAULT_PREFERENCES);
+  }
+  
   }, []);
 
   // Helper to update deadlines and save to storage
