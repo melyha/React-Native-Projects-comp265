@@ -86,13 +86,6 @@ export default function TabLayout() {
         }}
       />
 
-      <Tabs.Screen
-        name="course-details"
-        options={{
-          href: null, // Hidden from tab bar
-          title: "Course Details",
-        }}
-      />
 
       <Tabs.Screen
         name="grade-details"
@@ -101,7 +94,7 @@ export default function TabLayout() {
           title: "Grade Details",
         }}
       />
-      
+
     </Tabs>
   );
 }

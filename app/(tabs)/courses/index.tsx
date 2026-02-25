@@ -71,7 +71,7 @@ export default function CoursesScreen() {
 
   const handleCoursePress = (course: any) => {
     router.push({
-      pathname: '/course-details',
+      pathname: '/courses/course-details',
       params: {
         courseId: course.id,
         courseCode: course.code,

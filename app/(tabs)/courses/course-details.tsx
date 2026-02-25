@@ -29,7 +29,7 @@ export default function CourseDetailsScreen() {
 
   const handleProfessorPress = () => {
     router.push({
-      pathname: "/professor-details",
+      pathname: "/courses/professor-details",
       params: {
         professorName: instructor as string,
         courseCode: courseCode as string,
