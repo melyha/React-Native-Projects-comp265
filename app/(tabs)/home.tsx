@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: "#6750A4",
+    backgroundColor: colors.primary,
     padding: 20,
   },
   welcomeText: {
