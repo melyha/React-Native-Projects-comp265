@@ -4,7 +4,7 @@
  * * Displays an assignment deadline with swipe-to-delete and complete button
  */
 
-import React,  { useRef } from "react";
+import React, { useRef } from "react";
 import {
   View,
   Text,
@@ -93,11 +93,9 @@ export default function DeadlineCard({
       >
         <View style={styles.content}>
           <View style={styles.header}>
-            <Text
-              style={[styles.courseCode, completed && styles.completedText]}
-            >
-              {courseCode}
-            </Text>
+            <View style={styles.courseBadge}>
+              <Text style={styles.courseBadgeText}>{courseCode}</Text>
+            </View>
             {isUrgent && !completed && (
               <View style={styles.urgentBadge}>
                 <Text style={styles.urgentText}>Urgent</Text>
@@ -164,20 +162,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: spacing.xs,
   },
-  courseCode: {
-    ...typography.labelLarge,
-    color: colors.badgeCourseText,
-    backgroundColor:colors.badgeCourseBackground,
-    marginRight: spacing.xs,
-    paddingHorizontal: spacing.xs,
-    paddingVertical: spacing.xxs,
-    borderRadius: borderRadius.xs,
-  },
+ courseBadge: {
+  backgroundColor: '#F3E8FF',
+  paddingHorizontal: spacing.sm,
+  paddingVertical: 2,
+  borderRadius: borderRadius.full,
+  marginRight: spacing.xs,
+},
+courseBadgeText: {
+  ...typography.labelMedium,
+  color: '#8200DB',
+},
+
   urgentBadge: {
     backgroundColor: colors.errorContainer,
-    paddingHorizontal: spacing.xs,
-    paddingVertical: spacing.xxs,
-    borderRadius: borderRadius.xs,
+    paddingHorizontal: spacing.sm,
+  paddingVertical: 2,
+  borderRadius: borderRadius.full,
+  marginRight: spacing.xs,
   },
   urgentText: {
     ...typography.labelSmall,

@@ -34,7 +34,7 @@ export default function ScheduleCard({
       </View>
 
       <View style={styles.details}>
-        <Text style={styles.courseCode}>{courseCode}</Text>
+        <Text style={styles.codeBadge}>{courseCode}</Text>
         <Text style={styles.courseName}>{courseName}</Text>
         <Text style={styles.room}>{room}</Text>
       </View>
@@ -69,11 +69,7 @@ const styles = StyleSheet.create({
   details: {
     flex: 1,
   },
-  courseCode: {
-    ...typography.labelLarge,
-    color: colors. classChipText,
-    marginBottom: 4,
-  },
+  
   courseName: {
     ...typography.titleMedium,
     color: colors.onSurface,
@@ -83,4 +79,21 @@ const styles = StyleSheet.create({
     ...typography.bodySmall,
     color: colors.textSecondary,
   },
+
+  codeBadge: {
+  backgroundColor: '#DBEAFE',
+  paddingHorizontal: spacing.sm,
+  paddingVertical: 2,
+  borderRadius: borderRadius.full,
+  alignSelf: 'flex-start',
+  marginBottom: spacing.xs,
+  
+  ...typography.labelMedium,
+  color: '#1447E6',
+},
+codeText: {
+  ...typography.labelMedium,
+  color: '#1447E6',
+},
+
 });

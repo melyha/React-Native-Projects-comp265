@@ -187,8 +187,6 @@ export default function HomeScreen() {
             />
           </View>
 
-
-          {/* Deadlines Section/ DeadlineCard Component*/}
           {/* Deadlines Section/ DeadlineCard Component*/}
           <View style={styles.section}>
             <View style={styles.sectionHeader}>

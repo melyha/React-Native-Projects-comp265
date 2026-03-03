@@ -20,8 +20,6 @@ import {
 const EVENTS_IMAGE = require("@/assets/images/events/bingo.png");
 
 export default function ScheduleScreen() {
-
-
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,8 +30,6 @@ export default function ScheduleScreen() {
         </View>
 
         <Text style={styles.todayLabel}>Today: Feb 1, 2026</Text>
-
-
 
         {/* Today's Classes */}
         <View style={styles.section}>
