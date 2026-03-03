@@ -10,6 +10,7 @@ import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
+import { Modal } from 'react-native';
 
 // Sample grade data
 const GRADES_DATA = [
