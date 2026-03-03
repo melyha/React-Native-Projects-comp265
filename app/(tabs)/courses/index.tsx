@@ -207,6 +207,90 @@ export default function CoursesScreen() {
       </ScrollView>
     </SafeAreaView>
   );
+
+  {/* Semester Selector Modal */}
+<Modal
+  visible={semesterModalVisible}
+  animationType="slide"
+  transparent={true}
+  onRequestClose={() => setSemesterModalVisible(false)}
+>
+  <View style={styles.modalOverlay}>
+    <View style={styles.semesterModal}>
+      <Text style={styles.modalTitle}>Select Semester</Text>
+      
+      {[
+        '2025/2026 Spring/Summer Semester',
+        '2025/2026 Winter Semester',
+        '2025/2026 Fall Semester',
+        '2024/2025 Winter Semester',
+        '2024/2025 Fall Semester',
+      ].map((semester) => (
+        <TouchableOpacity
+          key={semester}
+          style={styles.semesterOption}
+          onPress={() => {
+            setSelectedSemester(semester);
+            setSemesterModalVisible(false);
+          }}
+        >
+          <Text style={styles.semesterOptionText}>{semester}</Text>
+        </TouchableOpacity>
+      ))}
+      
+      <TouchableOpacity 
+        style={styles.cancelButton}
+        onPress={() => setSemesterModalVisible(false)}
+      >
+        <Text style={styles.cancelButtonText}>Cancel</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+{/* Filter Modal */}
+<Modal
+  visible={filterModalVisible}
+  animationType="slide"
+  transparent={true}
+  onRequestClose={() => setFilterModalVisible(false)}
+>
+  <View style={styles.modalOverlay}>
+    <View style={styles.filterModal}>
+      <View style={styles.modalHeader}>
+        <Text style={styles.modalTitle}>Filter Courses</Text>
+        <TouchableOpacity onPress={() => setFilterModalVisible(false)}>
+          <Ionicons name="close" size={24} color={colors.onSurface} />
+        </TouchableOpacity>
+      </View>
+      
+      <TouchableOpacity style={styles.filterOption}>
+        <Text style={styles.filterOptionText}>By Term</Text>
+      </TouchableOpacity>
+      
+      <TouchableOpacity style={styles.filterOption}>
+        <Text style={styles.filterOptionText}>By Instructor</Text>
+      </TouchableOpacity>
+      
+      <View style={styles.filterActions}>
+        <TouchableOpacity 
+          style={styles.resetButton}
+          onPress={() => setFilterModalVisible(false)}
+        >
+          <Text style={styles.resetButtonText}>Reset</Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.applyButton}
+          onPress={() => setFilterModalVisible(false)}
+        >
+          <Text style={styles.applyButtonText}>Apply Filters (0)</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+</Modal>
+
 }
 
 const styles = StyleSheet.create({
@@ -293,4 +377,94 @@ const styles = StyleSheet.create({
     ...typography.bodySmall,
     color: colors.textSecondary,
   },
+
+  modalOverlay: {
+  flex: 1,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  justifyContent: 'flex-end',
+},
+semesterModal: {
+  backgroundColor: colors.white,
+  borderTopLeftRadius: borderRadius.xl,
+  borderTopRightRadius: borderRadius.xl,
+  padding: spacing.xl,
+  paddingBottom: spacing.xxl,
+},
+filterModal: {
+  backgroundColor: colors.white,
+  borderTopLeftRadius: borderRadius.xl,
+  borderTopRightRadius: borderRadius.xl,
+  padding: spacing.xl,
+  maxHeight: '40%',
+},
+modalHeader: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: spacing.lg,
+},
+modalTitle: {
+  ...typography.titleLarge,
+  color: colors.onSurface,
+},
+semesterOption: {
+  paddingVertical: spacing.md,
+  borderBottomWidth: 1,
+  borderBottomColor: colors.outlineVariant,
+},
+semesterOptionText: {
+  ...typography.bodyLarge,
+  color: colors.onSurface,
+},
+filterOption: {
+  paddingVertical: spacing.lg,
+  borderBottomWidth: 1,
+  borderBottomColor: colors.outlineVariant,
+},
+filterOptionText: {
+  ...typography.bodyLarge,
+  color: colors.onSurface,
+},
+cancelButton: {
+  marginTop: spacing.lg,
+  paddingVertical: spacing.md,
+  borderRadius: borderRadius.full,
+  borderWidth: 1,
+  borderColor: colors.outline,
+  alignItems: 'center',
+},
+cancelButtonText: {
+  ...typography.labelLarge,
+  color: colors.onSurface,
+},
+filterActions: {
+  flexDirection: 'row',
+  gap: spacing.md,
+  marginTop: spacing.xl,
+},
+resetButton: {
+  flex: 1,
+  paddingVertical: spacing.md,
+  borderRadius: borderRadius.full,
+  borderWidth: 1,
+  borderColor: colors.outline,
+  alignItems: 'center',
+},
+resetButtonText: {
+  ...typography.labelLarge,
+  color: colors.onSurface,
+},
+applyButton: {
+  flex: 2,
+  paddingVertical: spacing.md,
+  borderRadius: borderRadius.full,
+  backgroundColor: colors.primary,
+  alignItems: 'center',
+},
+applyButtonText: {
+  ...typography.labelLarge,
+  color: colors.white,
+},
+
+
 });
