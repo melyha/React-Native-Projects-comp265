@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
+import { Modal } from 'react-native';
 
 // Sample course data (later from storage/API)
 const COURSES_DATA = [
