@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   },
   courseCode: {
     ...typography.labelLarge,
-    color: colors.badgeCourse,
+    color: colors.primary,
     marginBottom: spacing.xxs,
   },
   courseName: {

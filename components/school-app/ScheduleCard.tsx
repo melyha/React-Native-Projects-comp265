@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   courseCode: {
     ...typography.labelLarge,
-    color: colors.badgeCourse,
+    color: colors. classChipText,
     marginBottom: 4,
   },
   courseName: {

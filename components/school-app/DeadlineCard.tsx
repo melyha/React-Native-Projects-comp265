@@ -166,8 +166,12 @@ const styles = StyleSheet.create({
   },
   courseCode: {
     ...typography.labelLarge,
-    color: colors.badgeCourse,
+    color: colors.badgeCourseText,
+    backgroundColor:colors.badgeCourseBackground,
     marginRight: spacing.xs,
+    paddingHorizontal: spacing.xs,
+    paddingVertical: spacing.xxs,
+    borderRadius: borderRadius.xs,
   },
   urgentBadge: {
     backgroundColor: colors.errorContainer,
