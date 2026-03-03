@@ -26,7 +26,7 @@ interface NewsCardProps {
   date: string;
   description: string;
   buttonText: string;
-  imageUrl?: string;
+   imageUrl?: string | ImageSourcePropType;
   backgroundColor?: string;
   onPress?: () => void;
 }
@@ -45,7 +45,7 @@ export default function NewsCard({
       {/* Image (if provided) */}
       {imageUrl && (
         <Image
-          source={{ uri: imageUrl }}
+          source={typeof imageUrl === "string" ? { uri: imageUrl } : imageUrl}
           style={styles.image}
           resizeMode="cover"
         />

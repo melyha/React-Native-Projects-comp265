@@ -275,7 +275,7 @@ export default function HomeScreen() {
               date="Feb 1, 2026"
               description="FigBuild is Figma for Edu’s annual student design competition, where university students build and submit an original project using Figma over the course of a weekend for a chance to win big prizes."
               buttonText="View Details"
-              imageUrl="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop"
+              imageUrl={require('@/assets/images/news/news1.png')}
               onPress={() => console.log("News 1 pressed")}
             />
 
@@ -295,7 +295,7 @@ export default function HomeScreen() {
               date="Feb 1, 2026"
               description="Attention graduates! Do you have questions about convocation? Join us for a Zoom session dedicated to all things convocation."
               buttonText="Register Here"
-              imageUrl="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=200&fit=crop"
+              imageUrl={require('@/assets/images/news/news3.png')}
               onPress={() => console.log("News 3 pressed")}
             />
           </View>
