@@ -186,7 +186,7 @@ export default function HomeScreen() {
               room="Room B8.10"
             />
           </View>
-          
+
 
           {/* Deadlines Section/ DeadlineCard Component*/}
           {/* Deadlines Section/ DeadlineCard Component*/}
@@ -273,9 +273,9 @@ export default function HomeScreen() {
             </View>
             {/* News Card 1 */}
             <NewsCard
-              title="SaskInteractive Digital Showcase"
-              date="Nov 21, 2025"
-              description="Join us Friday November 28 from 5:00 pm - 8:00 pm at Innovation Place!"
+              title="FigBuild 2026 - Student Design Competition"
+              date="Feb 1, 2026"
+              description="FigBuild is Figma for Edu’s annual student design competition, where university students build and submit an original project using Figma over the course of a weekend for a chance to win big prizes."
               buttonText="View Details"
               imageUrl="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=200&fit=crop"
               onPress={() => console.log("News 1 pressed")}
@@ -283,20 +283,20 @@ export default function HomeScreen() {
 
             {/* News Card 2 */}
             <NewsCard
-              title="Refund and Withdrawal Deadlines for Fall Semester"
-              date="Nov 24, 2025"
-              description="Check out the full details below."
-              buttonText="Check Deadlines"
+              title="Tell us about your experience at Sask Polytech"
+              date="Feb 1, 2026"
+              description="If you are a current student in a certificate, diploma or degree  program, share your feedback in the 2025-26 Student Engagement Survey."
+              buttonText="Take Survey"
               backgroundColor={colors.primaryContainer}
               onPress={() => console.log("News 2 pressed")}
             />
 
             {/* News Card 3 */}
             <NewsCard
-              title="Winter Break Schedule"
-              date="Dec 10, 2025"
-              description="Important information about campus hours during winter break."
-              buttonText="View Schedule"
+              title="Convocation Info sessions"
+              date="Feb 1, 2026"
+              description="Attention graduates! Do you have questions about convocation? Join us for a Zoom session dedicated to all things convocation."
+              buttonText="Register Here"
               imageUrl="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=400&h=200&fit=crop"
               onPress={() => console.log("News 3 pressed")}
             />
