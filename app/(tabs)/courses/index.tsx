@@ -221,7 +221,7 @@ export default function CoursesScreen() {
     transparent={true}
     onRequestClose={() => setSemesterModalVisible(false)}
   >
-    <View style={styles.modalOverlay}>
+    <View style={styles.modalOverlay1}>
       <View style={styles.semesterModal}>
         <Text style={styles.modalTitle}>Select Semester</Text>
 
@@ -263,7 +263,7 @@ export default function CoursesScreen() {
     transparent={true}
     onRequestClose={() => setFilterModalVisible(false)}
   >
-    <View style={styles.modalOverlay}>
+    <View style={styles.modalOverlay2}>
       <View style={styles.filterModal}>
         <View style={styles.modalHeader}>
           <Text style={styles.modalTitle}>Filter Courses</Text>
@@ -298,7 +298,7 @@ export default function CoursesScreen() {
       </View>
     </View>
   </Modal>;
-  
+
     </SafeAreaView>
   );
 
@@ -390,17 +390,25 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
   },
 
-  modalOverlay: {
+  modalOverlay1: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "flex-end",
+    justifyContent: 'center',     
+  alignItems: 'center',         
+  padding: spacing.lg,           
   },
+  modalOverlay2: {
+  flex: 1,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  justifyContent: 'flex-end',  
+},
   semesterModal: {
     backgroundColor: colors.white,
-    borderTopLeftRadius: borderRadius.xl,
-    borderTopRightRadius: borderRadius.xl,
+    borderRadius: borderRadius.xl,
     padding: spacing.xl,
     paddingBottom: spacing.xxl,
+    width: '100%',                            
+  maxWidth: 400,
   },
   filterModal: {
     backgroundColor: colors.white,
