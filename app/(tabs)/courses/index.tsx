@@ -166,8 +166,8 @@ export default function CoursesScreen() {
         <TouchableOpacity
           style={styles.filterButton}
           activeOpacity={0.7}
-          onPress={() => setFilterModalVisible(true)}
-        >
+           onPress={() => router.push('/filter-modal')}
+>
           <Text style={styles.filterButtonText}>Filter Courses</Text>
         </TouchableOpacity>
 
