@@ -211,10 +211,8 @@ export default function CoursesScreen() {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
-  );
 
-  {
+      {
     /* Semester Selector Modal */
   }
   <Modal
@@ -300,6 +298,11 @@ export default function CoursesScreen() {
       </View>
     </View>
   </Modal>;
+  
+    </SafeAreaView>
+  );
+
+  
 }
 
 const styles = StyleSheet.create({
