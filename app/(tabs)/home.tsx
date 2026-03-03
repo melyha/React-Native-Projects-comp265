@@ -132,7 +132,7 @@ export default function HomeScreen() {
           {/* Header Section/ Header Component */}
           <View style={styles.header}>
             <Text style={styles.welcomeText}>Welcome back,</Text>
-            <Text style={styles.nameText}>Cassandra Wellington</Text>
+            <Text style={styles.nameText}>Melissa Wallace</Text>
 
             <View style={styles.switchRow}>
               <Text style={styles.switchLabel}>Notifications</Text>
