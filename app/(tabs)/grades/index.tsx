@@ -3,89 +3,105 @@
  * Displays all course grades with GPA summary and trend indicators
  */
 
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
-import { Modal } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+  elevation,
+} from "@/constants/design-tokens";
+import { Modal } from "react-native";
 
 // Sample grade data
 const GRADES_DATA = [
   {
-    id: '1',
-    courseCode: 'MULT213',
-    courseName: 'Web Development 5',
-    letterGrade: 'A-',
+    id: "1",
+    courseCode: "MULT213",
+    courseName: "Web Development 5",
+    letterGrade: "A-",
     percentage: 84,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '2',
-    courseCode: 'DSGN210',
-    courseName: 'Introduction to Mobile Application Design',
-    letterGrade: 'C+',
+    id: "2",
+    courseCode: "DSGN210",
+    courseName: "Introduction to Mobile Application Design",
+    letterGrade: "C+",
     percentage: 65,
-    trend: 'down',
+    trend: "down",
   },
   {
-    id: '3',
-    courseCode: 'MKTG206',
-    courseName: 'Digital Marketing 2',
-    letterGrade: 'C',
+    id: "3",
+    courseCode: "MKTG206",
+    courseName: "Digital Marketing 2",
+    letterGrade: "C",
     percentage: 60,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '4',
-    courseCode: 'GRPH201',
-    courseName: 'Advanced Vector Graphics',
-    letterGrade: 'A+',
+    id: "4",
+    courseCode: "GRPH201",
+    courseName: "Advanced Vector Graphics",
+    letterGrade: "A+",
     percentage: 98,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '5',
-    courseCode: 'GRPH202',
-    courseName: 'Electronic Publishing',
-    letterGrade: 'A+',
+    id: "5",
+    courseCode: "GRPH202",
+    courseName: "Electronic Publishing",
+    letterGrade: "A+",
     percentage: 93,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '6',
-    courseCode: 'MULT123',
-    courseName: '3D Fundamentals 1',
-    letterGrade: 'A+',
+    id: "6",
+    courseCode: "MULT123",
+    courseName: "3D Fundamentals 1",
+    letterGrade: "A+",
     percentage: 98,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '7',
-    courseCode: 'MULT205',
-    courseName: 'Content Management Systems',
-    letterGrade: 'A-',
+    id: "7",
+    courseCode: "MULT205",
+    courseName: "Content Management Systems",
+    letterGrade: "A-",
     percentage: 84,
-    trend: 'up',
+    trend: "up",
   },
   {
-    id: '8',
-    courseCode: 'PROF200',
-    courseName: 'Professional Practices 2',
-    letterGrade: 'A+',
+    id: "8",
+    courseCode: "PROF200",
+    courseName: "Professional Practices 2",
+    letterGrade: "A+",
     percentage: 97,
-    trend: 'up',
+    trend: "up",
   },
 ];
 
 export default function GradesScreen() {
   const [gpa] = useState(3.67); // Calculated GPA
+  const [semesterModalVisible, setSemesterModalVisible] = useState(false);
+  const [selectedSemester, setSelectedSemester] = useState(
+    "2025/2026 Winter Semester",
+  );
 
   const handleGradePress = (grade: any) => {
     router.push({
-      pathname: '/grades/grade-details',
+      pathname: "/grades/grade-details",
       params: {
         gradeId: grade.id,
         courseCode: grade.courseCode,
@@ -97,11 +113,11 @@ export default function GradesScreen() {
   };
 
   const getTrendIcon = (trend: string) => {
-    return trend === 'up' ? 'trending-up' : 'trending-down';
+    return trend === "up" ? "trending-up" : "trending-down";
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={["top"]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
@@ -112,7 +128,7 @@ export default function GradesScreen() {
         {/* GPA Card */}
         <TouchableOpacity style={styles.gpaCard} activeOpacity={0.8}>
           <LinearGradient
-            colors={['#615FFF', '#9810FA']}
+            colors={["#615FFF", "#9810FA"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.gpaGradient}
@@ -120,7 +136,11 @@ export default function GradesScreen() {
             <View style={styles.gpaContent}>
               <Text style={styles.gpaLabel}>Current GPA</Text>
               <View style={styles.gpaIconContainer}>
-                <Ionicons name="chevron-forward" size={20} color={colors.white} />
+                <Ionicons
+                  name="chevron-forward"
+                  size={20}
+                  color={colors.white}
+                />
               </View>
             </View>
           </LinearGradient>
@@ -139,12 +159,14 @@ export default function GradesScreen() {
                 {/* Course Code with Trend */}
                 <View style={styles.courseCodeRow}>
                   <View style={styles.courseCodeBadge}>
-                    <Text style={styles.courseCodeText}>{grade.courseCode}</Text>
+                    <Text style={styles.courseCodeText}>
+                      {grade.courseCode}
+                    </Text>
                   </View>
                   <Ionicons
                     name={getTrendIcon(grade.trend)}
                     size={14}
-                    color={grade.trend === 'up' ? '#10B981' : '#EF4444'}
+                    color={grade.trend === "up" ? "#10B981" : "#EF4444"}
                   />
                 </View>
 
@@ -159,7 +181,11 @@ export default function GradesScreen() {
               </View>
 
               {/* Chevron Icon */}
-              <Ionicons name="chevron-forward" size={24} color={colors.outline} />
+              <Ionicons
+                name="chevron-forward"
+                size={24}
+                color={colors.outline}
+              />
             </TouchableOpacity>
           ))}
         </View>
@@ -190,16 +216,16 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.md,
     marginBottom: spacing.lg,
     borderRadius: borderRadius.lg,
-    overflow: 'hidden',
+    overflow: "hidden",
     ...elevation.level2,
   },
   gpaGradient: {
     padding: spacing.md,
   },
   gpaContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   gpaLabel: {
     ...typography.labelLarge,
@@ -208,8 +234,8 @@ const styles = StyleSheet.create({
   gpaIconContainer: {
     width: 20,
     height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   gradesList: {
     paddingHorizontal: spacing.lg,
@@ -217,9 +243,9 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   gradeCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: colors.white,
     padding: spacing.lg,
     borderRadius: borderRadius.md,
@@ -229,20 +255,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   courseCodeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: spacing.xs,
     marginBottom: spacing.xs,
   },
   courseCodeBadge: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: "#F3F4F6",
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xxs,
     borderRadius: borderRadius.full,
   },
   courseCodeText: {
     ...typography.labelMedium,
-    color: '#364153',
+    color: "#364153",
   },
   courseName: {
     ...typography.bodyMedium,
@@ -250,10 +276,10 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   gradeDisplay: {
-    position: 'absolute',
+    position: "absolute",
     right: spacing.xl,
     top: spacing.xxs,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   letterGrade: {
     ...typography.titleLarge,
