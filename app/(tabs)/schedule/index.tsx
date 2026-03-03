@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Calendar } from '@marceloterreiro/flash-calendar';
+
 import {
   colors,
   typography,
@@ -20,7 +20,7 @@ import {
 const EVENTS_IMAGE = require("@/assets/images/events/bingo.png");
 
 export default function ScheduleScreen() {
-  const [selected, setSelected] = useState('2026-02-01');
+
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
@@ -33,13 +33,7 @@ export default function ScheduleScreen() {
 
         <Text style={styles.todayLabel}>Today: Feb 1, 2026</Text>
 
-        {/* Calendar */}
-<View style={styles.calendarContainer}>
-  <Calendar
-    calendarMonthId="2026-02"
-    onCalendarDayPress={(date) => setSelected(date)}
-  />
-</View>
+
 
         {/* Today's Classes */}
         <View style={styles.section}>
@@ -158,14 +152,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     marginBottom: spacing.md,
   },
-  calendarContainer: {
-    backgroundColor: colors.white,
-    marginHorizontal: spacing.md,
-    borderRadius: borderRadius.xl,
-    overflow: "hidden",
-    ...elevation.level1,
-    marginBottom: spacing.lg,
-  },
+
   section: { paddingHorizontal: spacing.lg, marginBottom: spacing.xl },
   sectionTitle: {
     ...typography.titleMedium,
