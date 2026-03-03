@@ -3,113 +3,131 @@
  * Shows all enrolled courses with search and filter
  */
 
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, typography, spacing, borderRadius, elevation } from '@/constants/design-tokens';
-import { Modal } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+  elevation,
+} from "@/constants/design-tokens";
+import { Modal } from "react-native";
 
 // Sample course data (later from storage/API)
 const COURSES_DATA = [
   {
-    id: '1',
-    code: 'COMP265',
-    name: 'Introduction to Mobile Application Development',
-    instructor: 'Jesse Rolheiser',
-    term: 'Winter 2025/2026',
+    id: "1",
+    code: "COMP265",
+    name: "Introduction to Mobile Application Development",
+    instructor: "Jesse Rolheiser",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 65,
   },
   {
-    id: '2',
-    code: 'MULT215',
-    name: 'Immersive Technologies 1',
-    instructor: 'Arlin Schaffel',
-    term: 'Winter 2025/2026',
+    id: "2",
+    code: "MULT215",
+    name: "Immersive Technologies 1",
+    instructor: "Arlin Schaffel",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 72,
   },
   {
-    id: '3',
-    code: 'MULT208',
-    name: 'Emerging Interactive Technologies',
-    instructor: 'Arlin Schaffel',
-    term: 'Winter 2025/2026',
+    id: "3",
+    code: "MULT208",
+    name: "Emerging Interactive Technologies",
+    instructor: "Arlin Schaffel",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 68,
   },
   {
-    id: '4',
-    code: 'MULT212',
-    name: '3D Fundamentals 2',
-    instructor: 'Jesse Rolheiser',
-    term: 'Winter 2025/2026',
+    id: "4",
+    code: "MULT212",
+    name: "3D Fundamentals 2",
+    instructor: "Jesse Rolheiser",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 81,
   },
   {
-    id: '5',
-    code: 'INDG100',
-    name: 'Introduction to Indigenous Studies',
-    instructor: 'Ashtyn Newell-Olson',
-    term: 'Winter 2025/2026',
+    id: "5",
+    code: "INDG100",
+    name: "Introduction to Indigenous Studies",
+    instructor: "Ashtyn Newell-Olson",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 75,
   },
   {
-    id: '6',
-    code: 'MULT216',
-    name: 'Immersive Technologies 2',
-    instructor: 'Arlin Schaffel',
-    term: 'Winter 2025/2026',
+    id: "6",
+    code: "MULT216",
+    name: "Immersive Technologies 2",
+    instructor: "Arlin Schaffel",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 88,
   },
   {
-    id: '7',
-    code: 'DGTL206',
-    name: 'Video 2',
-    instructor: 'Jesse Rolheiser',
-    term: 'Winter 2025/2026',
+    id: "7",
+    code: "DGTL206",
+    name: "Video 2",
+    instructor: "Jesse Rolheiser",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 79,
   },
   {
-    id: '8',
-    code: 'MULT217',
-    name: 'Creative Computing',
-    instructor: 'Jesse Rolheiser',
-    term: 'Winter 2025/2026',
+    id: "8",
+    code: "MULT217",
+    name: "Creative Computing",
+    instructor: "Jesse Rolheiser",
+    term: "Winter 2025/2026",
     credits: 3,
     progress: 92,
   },
   {
-    id: '9',
-    code: 'PROJ202',
-    name: 'Interactive Media Project',
-    instructor: 'Arlin Schaffel & Jesse Rolheiser',
-    term: 'Winter 2025/2026',
+    id: "9",
+    code: "PROJ202",
+    name: "Interactive Media Project",
+    instructor: "Arlin Schaffel & Jesse Rolheiser",
+    term: "Winter 2025/2026",
     credits: 6,
     progress: 84,
   },
 ];
 
 export default function CoursesScreen() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredCourses, setFilteredCourses] = useState(COURSES_DATA);
+  const [semesterModalVisible, setSemesterModalVisible] = useState(false);
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const [selectedSemester, setSelectedSemester] = useState(
+    "2025/2026 Winter Semester",
+  );
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
-    if (text.trim() === '') {
+    if (text.trim() === "") {
       setFilteredCourses(COURSES_DATA);
     } else {
       const filtered = COURSES_DATA.filter(
         (course) =>
           course.code.toLowerCase().includes(text.toLowerCase()) ||
           course.name.toLowerCase().includes(text.toLowerCase()) ||
-          course.instructor.toLowerCase().includes(text.toLowerCase())
+          course.instructor.toLowerCase().includes(text.toLowerCase()),
       );
       setFilteredCourses(filtered);
     }
@@ -117,7 +135,7 @@ export default function CoursesScreen() {
 
   const handleCoursePress = (course: any) => {
     router.push({
-      pathname: '/courses/course-details',
+      pathname: "/courses/course-details",
       params: {
         courseId: course.id,
         courseCode: course.code,
@@ -131,8 +149,11 @@ export default function CoursesScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={styles.container} edges={["top"]}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>My Courses</Text>
@@ -146,7 +167,12 @@ export default function CoursesScreen() {
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color={colors.outline} style={styles.searchIcon} />
+          <Ionicons
+            name="search"
+            size={20}
+            color={colors.outline}
+            style={styles.searchIcon}
+          />
           <TextInput
             style={styles.searchInput}
             placeholder="Search Courses..."
@@ -170,7 +196,11 @@ export default function CoursesScreen() {
                 <Text style={styles.courseName}>{course.name}</Text>
                 <Text style={styles.instructorName}>{course.instructor}</Text>
               </View>
-              <Ionicons name="chevron-forward" size={20} color={colors.outline} />
+              <Ionicons
+                name="chevron-forward"
+                size={20}
+                color={colors.outline}
+              />
             </TouchableOpacity>
           ))}
         </View>
@@ -207,7 +237,7 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.full,
     borderWidth: 1,
     borderColor: colors.outline,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: spacing.md,
   },
   filterButtonText: {
@@ -215,8 +245,8 @@ const styles = StyleSheet.create({
     color: colors.onSurface,
   },
   searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: colors.surfaceContainerLow,
     marginHorizontal: spacing.lg,
     paddingHorizontal: spacing.md,
@@ -238,9 +268,9 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   courseCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: colors.white,
     padding: spacing.lg,
     borderRadius: borderRadius.lg,
