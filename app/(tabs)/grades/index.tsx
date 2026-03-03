@@ -122,7 +122,9 @@ export default function GradesScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>My Grades</Text>
-          <Text style={styles.semester}>2025/2026 Fall Semester</Text>
+          <TouchableOpacity onPress={() => setSemesterModalVisible(true)}>
+            <Text style={styles.semester}>{selectedSemester}</Text>
+          </TouchableOpacity>
         </View>
 
         {/* GPA Card */}
@@ -341,10 +343,11 @@ const styles = StyleSheet.create({
 
   semesterModal: {
     backgroundColor: colors.white,
-    borderTopLeftRadius: borderRadius.xl,
-    borderTopRightRadius: borderRadius.xl,
+    borderRadius: borderRadius.xl,
     padding: spacing.xl,
     paddingBottom: spacing.xxl,
+    width: "100%",
+    maxWidth: 400,
   },
 
   modalTitle: {
