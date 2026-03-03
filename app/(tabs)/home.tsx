@@ -33,16 +33,16 @@ import Drawer from "@/components/school-app/Drawer";
 const DEFAULT_DEADLINES = [
   {
     id: "1",
-    courseCode: "DSGN210",
-    title: "Assignment 3: Build Web Applications",
-    dueDate: "Dec 18",
+    courseCode: "MULT215",
+    title: "Assignment 2: Create an Immersive Indoor Environment ",
+    dueDate: "Feb 6",
     isUrgent: true,
     completed: false,
   },
   {
     id: "2",
-    courseCode: "COMP265",
-    title: "React Native Navigation Exercise",
+    courseCode: "MULT212",
+    title: "Assignment 3: Use 3D Software to Create a 3D Print Design",
     dueDate: "Dec 20",
     isUrgent: true,
     completed: false,
@@ -175,17 +175,18 @@ export default function HomeScreen() {
 
             <ScheduleCard
               time="9:00 AM"
-              courseCode="MULT213"
-              courseName="Web Development 5"
+              courseCode="INDG100"
+              courseName="Introduction to Indigenous Studies"
               room="Room B8.10"
             />
             <ScheduleCard
-              time="9:00 AM"
-              courseCode="MULT213"
-              courseName="Web Development 5"
+              time="1:00 PM"
+              courseCode="COMP265"
+              courseName="Introduction to Mobile Application Development"
               room="Room B8.10"
             />
           </View>
+          
 
           {/* Deadlines Section/ DeadlineCard Component*/}
           {/* Deadlines Section/ DeadlineCard Component*/}
